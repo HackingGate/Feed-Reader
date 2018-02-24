@@ -1,12 +1,12 @@
 PODS:
-  - FeedKit (7.0.0)
+  - FeedKit (7.0.1)
 
 DEPENDENCIES:
   - FeedKit (~> 7.0)
 
 SPEC CHECKSUMS:
-  FeedKit: 5f044bbefb6eea7b2f1ff1321b575295bfbdf3fc
+  FeedKit: 9be69ab57ef0eb922ee4b6c31cb6b8840a5bbb29
 
 PODFILE CHECKSUM: 311c7799dcd9b26dbc23b542d25d40dbe80da64e
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.4.0
