@@ -17,6 +17,8 @@
 		76C7FA6B1F93512C00A7F0CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76C7FA691F93512C00A7F0CD /* LaunchScreen.storyboard */; };
 		76C7FA761F93512C00A7F0CD /* FeedReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C7FA751F93512C00A7F0CD /* FeedReaderTests.swift */; };
 		76C7FA811F93512C00A7F0CD /* FeedReaderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C7FA801F93512C00A7F0CD /* FeedReaderUITests.swift */; };
+		76CC4F3A204179D00042F74A /* FeedlyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CC4F39204179D00042F74A /* FeedlyAPI.swift */; };
+		76CC4F3D20418C610042F74A /* SearchResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CC4F3C20418C610042F74A /* SearchResultTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		76C7FA7C1F93512C00A7F0CD /* FeedReaderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeedReaderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76C7FA801F93512C00A7F0CD /* FeedReaderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedReaderUITests.swift; sourceTree = "<group>"; };
 		76C7FA821F93512C00A7F0CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76CC4F39204179D00042F74A /* FeedlyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedlyAPI.swift; sourceTree = "<group>"; };
+		76CC4F3C20418C610042F74A /* SearchResultTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewController.swift; sourceTree = "<group>"; };
 		7E23E07E426A9758C66CBD7C /* Pods-FeedReader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FeedReader.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FeedReader/Pods-FeedReader.debug.xcconfig"; sourceTree = "<group>"; };
 		ED1FC79AA0FF996D59D49021 /* Pods-FeedReader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FeedReader.release.xcconfig"; path = "Pods/Target Support Files/Pods-FeedReader/Pods-FeedReader.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,9 +121,11 @@
 		76C7FA5A1F93512B00A7F0CD /* FeedReader */ = {
 			isa = PBXGroup;
 			children = (
+				76CC4F3B204179DE0042F74A /* API */,
 				76C7FA5B1F93512C00A7F0CD /* AppDelegate.swift */,
 				76C7FA601F93512C00A7F0CD /* MasterViewController.swift */,
 				76C7FA621F93512C00A7F0CD /* DetailViewController.swift */,
+				76CC4F3C20418C610042F74A /* SearchResultTableViewController.swift */,
 				76C7FA641F93512C00A7F0CD /* Main.storyboard */,
 				76C7FA671F93512C00A7F0CD /* Assets.xcassets */,
 				76C7FA691F93512C00A7F0CD /* LaunchScreen.storyboard */,
@@ -145,6 +151,14 @@
 				76C7FA821F93512C00A7F0CD /* Info.plist */,
 			);
 			path = FeedReaderUITests;
+			sourceTree = "<group>";
+		};
+		76CC4F3B204179DE0042F74A /* API */ = {
+			isa = PBXGroup;
+			children = (
+				76CC4F39204179D00042F74A /* FeedlyAPI.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		88547DCECA733C9CBBFE245E /* Frameworks */ = {
@@ -348,7 +362,9 @@
 			files = (
 				76C7FA5F1F93512C00A7F0CD /* FeedReader.xcdatamodeld in Sources */,
 				76C7FA5C1F93512C00A7F0CD /* AppDelegate.swift in Sources */,
+				76CC4F3D20418C610042F74A /* SearchResultTableViewController.swift in Sources */,
 				76C7FA611F93512C00A7F0CD /* MasterViewController.swift in Sources */,
+				76CC4F3A204179D00042F74A /* FeedlyAPI.swift in Sources */,
 				76C7FA631F93512C00A7F0CD /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,6 +10,32 @@ import UIKit
 import CoreData
 import FeedKit
 
+protocol ManageDelegate {
+    func insertNewObject(_ feedTitle: String, _ feedURLString: String) -> Void
+}
+
+extension MasterViewController: ManageDelegate {
+    @objc
+    func insertNewObject(_ feedTitle: String, _ feedURLString: String) {
+        let context = self.fetchedResultsController.managedObjectContext
+        let newEvent = Event(context: context)
+        
+        // If appropriate, configure the new managed object.
+        newEvent.timestamp = Date()
+        newEvent.feedTitle = feedTitle
+        newEvent.feedURLString = feedURLString
+        // Save the context.
+        do {
+            try context.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+    }
+}
+
 class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
     var detailViewController: DetailViewController? = nil
@@ -40,57 +66,14 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     @objc
     func addFeedSource() {
-        let alertController = UIAlertController(title: "Add Feed URL", message: "Please input URL", preferredStyle: .alert)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let searchResultTVC = storyboard.instantiateViewController(withIdentifier: "SearchResultTableViewController") as! SearchResultTableViewController
+        searchResultTVC.delegate = self
         
-        let confirmAction = UIAlertAction(title: "Confirm", style: .default) { (_) in
-            let field = alertController.textFields![0]
-
-            if let feedURL = URL(string: field.text!) {
-                
-                let parser = FeedParser(URL: feedURL) // or FeedParser(data: data)
-                
-                parser?.parseAsync(queue: DispatchQueue.global(qos: .userInitiated)) { (result) in
-                    // Do your thing, then back to the Main thread
-                    DispatchQueue.main.async {
-                        // ..and update the UI
-                        
-                        self.insertNewObject((result.rssFeed?.title)!, field.text!)
-                    }
-                }
-
-            }
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
-        
-        alertController.addTextField { (textField) in
-            textField.placeholder = "https://"
-        }
-        
-        alertController.addAction(confirmAction)
-        alertController.addAction(cancelAction)
-        
-        self.present(alertController, animated: true, completion: nil)
-    }
-
-    @objc
-    func insertNewObject(_ feedTitle: String, _ feedURLString: String) {
-        let context = self.fetchedResultsController.managedObjectContext
-        let newEvent = Event(context: context)
-             
-        // If appropriate, configure the new managed object.
-        newEvent.timestamp = Date()
-        newEvent.feedTitle = feedTitle
-        newEvent.feedURLString = feedURLString
-        // Save the context.
-        do {
-            try context.save()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-        }
+        let searchController = UISearchController(searchResultsController: searchResultTVC)
+        searchController.searchBar.delegate = searchResultTVC
+        searchController.view.backgroundColor = .white
+        self.present(searchController, animated: true, completion: nil)
     }
 
     // MARK: - Segues
