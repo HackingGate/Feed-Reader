@@ -13,12 +13,12 @@ import FeedKit
 class DetailViewController: UITableViewController {
     
     var result: Result?
-    var feedURLString: String = "http://images.apple.com/main/rss/hotnews/hotnews.rss"
 
     func configureView() {
         // Update the user interface for the detail item.
         
-        let feedURL = URL(string: feedURLString)!
+        guard let feedURLString = detailItem?.feedURLString else { return }
+        guard let feedURL = URL(string: feedURLString) else { return }
         let parser = FeedParser(URL: feedURL) // or FeedParser(data: data)
         parser?.parseAsync(queue: DispatchQueue.global(qos: .userInitiated)) { (result) in
             // Do your thing, then back to the Main thread
@@ -42,7 +42,7 @@ class DetailViewController: UITableViewController {
 
     var detailItem: Event? {
         didSet {
-            feedURLString = (detailItem?.feedURLString)!
+            title = detailItem?.feedTitle
             // Update the view.
             configureView()
         }
