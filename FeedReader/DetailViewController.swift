@@ -12,7 +12,7 @@ import FeedKit
 
 class DetailViewController: UITableViewController {
     
-    var feed: RSSFeed?
+    var result: Result?
     var feedURLString: String = "http://images.apple.com/main/rss/hotnews/hotnews.rss"
 
     func configureView() {
@@ -22,8 +22,7 @@ class DetailViewController: UITableViewController {
         let parser = FeedParser(URL: feedURL) // or FeedParser(data: data)
         parser?.parseAsync(queue: DispatchQueue.global(qos: .userInitiated)) { (result) in
             // Do your thing, then back to the Main thread
-            self.feed = result.rssFeed
-            
+            self.result = result
             DispatchQueue.main.async {
                 // ..and update the UI
                 self.tableView.reloadData()
@@ -34,7 +33,6 @@ class DetailViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        configureView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,19 +59,38 @@ extension DetailViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0: return self.feed?.items?.count ?? 0
-        default: fatalError()
+        if section == 0 {
+            if let items = result?.rssFeed?.items {
+                // RSS
+                return items.count
+            } else if let entries = result?.atomFeed?.entries {
+                // Atom
+                return entries.count
+            } else if let items = result?.jsonFeed?.items {
+                // JSON
+                return items.count
+            }
         }
+        return 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedItem", for: indexPath)
         
-        let item = feed?.items![indexPath.row]
-        let label101 = cell.viewWithTag(101) as! UILabel
-        label101.text = item?.title
+        if let items = result?.rssFeed?.items {
+            // RSS
+            let item = items[indexPath.row]
+            cell.textLabel?.text = item.title
+        } else if let entries = result?.atomFeed?.entries {
+            // Atom
+            let entry = entries[indexPath.row]
+            cell.textLabel?.text = entry.title
+        } else if let items = result?.jsonFeed?.items {
+            // JSON
+            let item = items[indexPath.row]
+            cell.textLabel?.text = item.title
+        }
         
         return cell
     }
@@ -85,9 +102,19 @@ extension DetailViewController {
 extension DetailViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item = feed?.items![indexPath.row]
-
-        if let itemURL = URL(string: (item?.link)!) {
+        var urlString: String?
+        if let items = result?.rssFeed?.items {
+            // RSS
+            urlString = items[indexPath.row].link
+        } else if let entries = result?.atomFeed?.entries {
+            // Atom
+            urlString = entries[indexPath.row].links?.first?.attributes?.href
+        } else if let items = result?.jsonFeed?.items {
+            // JSON
+            urlString = items[indexPath.row].url
+        }
+        
+        if let urlString = urlString, let itemURL = URL(string: urlString) {
             
             let configuration = SFSafariViewController.Configuration.init()
             configuration.entersReaderIfAvailable = true

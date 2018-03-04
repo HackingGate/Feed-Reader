@@ -150,26 +150,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FeedItem" rowHeight="86" id="Ith-BR-BZQ">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FeedItem" textLabel="sSI-6I-05w" rowHeight="86" style="IBUITableViewCellStyleDefault" id="Ith-BR-BZQ">
                                 <rect key="frame" x="0.0" y="28" width="375" height="86"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ith-BR-BZQ" id="HFd-nB-3Fc">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="85.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ugy-W0-2SJ">
-                                            <rect key="frame" x="8" y="8" width="359" height="70"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sSI-6I-05w">
+                                            <rect key="frame" x="16" y="0.0" width="343" height="85.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <constraints>
-                                        <constraint firstItem="ugy-W0-2SJ" firstAttribute="top" secondItem="HFd-nB-3Fc" secondAttribute="top" constant="8" id="6t3-il-X1m"/>
-                                        <constraint firstAttribute="bottom" secondItem="ugy-W0-2SJ" secondAttribute="bottom" constant="8" id="SJd-WP-cMp"/>
-                                        <constraint firstAttribute="trailing" secondItem="ugy-W0-2SJ" secondAttribute="trailing" constant="8" id="by3-Tm-Sna"/>
-                                        <constraint firstItem="ugy-W0-2SJ" firstAttribute="leading" secondItem="HFd-nB-3Fc" secondAttribute="leading" constant="8" id="uLu-p8-JO2"/>
-                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
