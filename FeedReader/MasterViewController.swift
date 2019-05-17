@@ -79,14 +79,26 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     // MARK: - Segues
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" {
-            if let indexPath = tableView.indexPathForSelectedRow {
-            let object = fetchedResultsController.object(at: indexPath)
-                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-                controller.detailItem = object
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-                controller.navigationItem.leftItemsSupplementBackButton = true
-            }
+        super.prepare(for: segue, sender: sender)
+        
+        /*
+         Check if this is a segue from a cell and that it's presenting a
+         `DetailViewController` embedded in a `UINavigationController`.
+         */
+        if let cell = sender as? UITableViewCell,
+            let indexPath = self.tableView.indexPath(for: cell),
+            let navigationController = segue.destination as? UINavigationController,
+            let detailViewController = navigationController.viewControllers.first as? DetailViewController
+        {
+            let fetchedObject = fetchedResultsController.object(at: indexPath)
+            
+            // Pass the `fetchedObject` to the `detailViewController`.
+            detailViewController.detailItem = fetchedObject
+            detailViewController.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+            detailViewController.navigationItem.leftItemsSupplementBackButton = true
+
+            // Hide the navigation bar if this is the peek segue.
+            navigationController.isNavigationBarHidden = segue.identifier == "previewDetail"
         }
     }
 
