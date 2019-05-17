@@ -20,7 +20,7 @@ class DetailViewController: UITableViewController {
         guard let feedURLString = detailItem?.feedURLString else { return }
         guard let feedURL = URL(string: feedURLString) else { return }
         let parser = FeedParser(URL: feedURL) // or FeedParser(data: data)
-        parser?.parseAsync(queue: DispatchQueue.global(qos: .userInitiated)) { (result) in
+        parser.parseAsync(queue: DispatchQueue.global(qos: .userInitiated)) { (result) in
             // Do your thing, then back to the Main thread
             self.result = result
             DispatchQueue.main.async {
