@@ -181,7 +181,6 @@
 				76C7FA551F93512B00A7F0CD /* Frameworks */,
 				76C7FA561F93512B00A7F0CD /* Resources */,
 				F90E3216731774DCC3382C25 /* [CP] Embed Pods Frameworks */,
-				B69C39FA1004DCC353F67B4D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -320,28 +319,13 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B69C39FA1004DCC353F67B4D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FeedReader/Pods-FeedReader-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		F90E3216731774DCC3382C25 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-FeedReader/Pods-FeedReader-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-FeedReader/Pods-FeedReader-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/FeedKit/FeedKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -350,7 +334,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FeedReader/Pods-FeedReader-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FeedReader/Pods-FeedReader-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

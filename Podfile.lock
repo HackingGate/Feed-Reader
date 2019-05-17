@@ -1,12 +1,16 @@
 PODS:
-  - FeedKit (7.0.1)
+  - FeedKit (8.1.1)
 
 DEPENDENCIES:
-  - FeedKit (~> 7.0)
+  - FeedKit (~> 8.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - FeedKit
 
 SPEC CHECKSUMS:
-  FeedKit: 9be69ab57ef0eb922ee4b6c31cb6b8840a5bbb29
+  FeedKit: 3418eed25f0b493b205b4de1b8511ac21d413fa9
 
-PODFILE CHECKSUM: 311c7799dcd9b26dbc23b542d25d40dbe80da64e
+PODFILE CHECKSUM: e64864cc019f8d135565041aab9aa5aade102448
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.6.2

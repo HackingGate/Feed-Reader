@@ -3,5 +3,5 @@ platform :ios, '11.0'
 use_frameworks!
 
 target 'FeedReader' do
-  pod 'FeedKit', '~> 7.0'
+  pod 'FeedKit', '~> 8.0'
 end
