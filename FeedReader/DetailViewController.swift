@@ -26,6 +26,7 @@ class DetailViewController: UITableViewController {
             DispatchQueue.main.async {
                 // ..and update the UI
                 self.tableView.reloadData()
+                self.refreshControl?.endRefreshing()
             }
         }
     }
@@ -36,6 +37,12 @@ class DetailViewController: UITableViewController {
         // Set up the detail view's `navigationItem`.
         navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
         navigationItem.leftItemsSupplementBackButton = true
+        
+        refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
+    }
+    
+    @objc func refresh(sender:AnyObject) {
+        configureView()
     }
 
     override func didReceiveMemoryWarning() {

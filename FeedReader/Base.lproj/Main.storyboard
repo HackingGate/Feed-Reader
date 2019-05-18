@@ -178,6 +178,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="9Vy-kV-2xR"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="dKL-bL-mLM">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7p0-2V-5qw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
