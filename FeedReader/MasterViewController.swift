@@ -94,8 +94,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             
             // Pass the `fetchedObject` to the `detailViewController`.
             detailViewController.detailItem = fetchedObject
-            detailViewController.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-            detailViewController.navigationItem.leftItemsSupplementBackButton = true
 
             // Hide the navigation bar if this is the peek segue.
             navigationController.isNavigationBarHidden = segue.identifier == "previewDetail"
