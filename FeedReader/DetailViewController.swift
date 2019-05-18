@@ -39,6 +39,19 @@ class DetailViewController: UITableViewController {
         navigationItem.leftItemsSupplementBackButton = true
         
         refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
+        
+        // Check for force touch feature, and add force touch/previewing capability.
+        if traitCollection.forceTouchCapability == .available {
+            /*
+             Register for `UIViewControllerPreviewingDelegate` to enable
+             "Peek" and "Pop".
+             (see: MasterViewController+UIViewControllerPreviewing.swift)
+             
+             The view controller will be automatically unregistered when it is
+             deallocated.
+             */
+            registerForPreviewing(with: self, sourceView: view)
+        }
     }
     
     @objc func refresh(sender:AnyObject) {
@@ -112,6 +125,16 @@ extension DetailViewController {
 extension DetailViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let itemURL = getFeedItemURL(indexPath: indexPath) else { return }
+        
+        let configuration = SFSafariViewController.Configuration()
+        configuration.entersReaderIfAvailable = true
+        let safariViewController = SFSafariViewController(url: itemURL, configuration: configuration)
+        
+        self.present(safariViewController, animated: true, completion: nil)
+    }
+    
+    func getFeedItemURL(indexPath: IndexPath) -> URL? {
         var urlString: String?
         if let items = result?.rssFeed?.items {
             // RSS
@@ -124,16 +147,10 @@ extension DetailViewController {
             urlString = items[indexPath.row].url
         }
         
-        if let urlString = urlString, let itemURL = URL(string: urlString) {
-            
-            let configuration = SFSafariViewController.Configuration.init()
-            configuration.entersReaderIfAvailable = true
-            let safariViewController = SFSafariViewController.init(url: itemURL, configuration: configuration)
-            
-            self.present(safariViewController, animated: true, completion: {
-                
-            })
-        }
+        guard let urlStringUnrap = urlString,
+            let itemURL = URL(string: urlStringUnrap) else { return nil }
+        
+        return itemURL
     }
     
 }
@@ -148,4 +165,30 @@ extension DetailViewController {
     }
 }
 
-
+extension DetailViewController: UIViewControllerPreviewingDelegate {
+    // MARK: UIViewControllerPreviewingDelegate
+    
+    /// Create a previewing view controller to be shown at "Peek".
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        // Obtain the index path and the cell that was pressed.
+        guard let indexPath = tableView.indexPathForRow(at: location),
+            let cell = tableView.cellForRow(at: indexPath) else { return nil }
+        
+        guard let itemURL = getFeedItemURL(indexPath: indexPath) else { return nil }
+        
+        let configuration = SFSafariViewController.Configuration()
+        configuration.entersReaderIfAvailable = true
+        let safariViewController = SFSafariViewController(url: itemURL, configuration: configuration)
+        
+        // Set the source rect to the cell frame, so surrounding elements are blurred.
+        previewingContext.sourceRect = cell.frame
+        
+        return safariViewController
+    }
+    
+    /// Present the view controller for the "Pop" action.
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        // Reuse the "Peek" view controller for presentation.
+        present(viewControllerToCommit, animated: true, completion: nil)
+    }
+}
