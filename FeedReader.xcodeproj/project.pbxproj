@@ -56,6 +56,7 @@
 		76C7FA821F93512C00A7F0CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76CC4F39204179D00042F74A /* FeedlyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedlyAPI.swift; sourceTree = "<group>"; };
 		76CC4F3C20418C610042F74A /* SearchResultTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewController.swift; sourceTree = "<group>"; };
+		CD7963C222A6B14F00DA03F1 /* FeedReader.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FeedReader.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +109,7 @@
 		76C7FA5A1F93512B00A7F0CD /* FeedReader */ = {
 			isa = PBXGroup;
 			children = (
+				CD7963C222A6B14F00DA03F1 /* FeedReader.entitlements */,
 				76CC4F3B204179DE0042F74A /* API */,
 				76C7FA5B1F93512C00A7F0CD /* AppDelegate.swift */,
 				76C7FA601F93512C00A7F0CD /* MasterViewController.swift */,
@@ -474,7 +476,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FeedReader/FeedReader.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 77CB32R5F4;
 				INFOPLIST_FILE = FeedReader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -483,6 +487,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hackinggate.FeedReader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_UIKITFORMAC = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -492,7 +497,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FeedReader/FeedReader.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 77CB32R5F4;
 				INFOPLIST_FILE = FeedReader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -501,6 +508,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hackinggate.FeedReader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_UIKITFORMAC = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
