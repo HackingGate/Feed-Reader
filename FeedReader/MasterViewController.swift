@@ -72,7 +72,11 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         let searchController = UISearchController(searchResultsController: searchResultTVC)
         searchController.searchBar.delegate = searchResultTVC
-        searchController.view.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            searchController.view.backgroundColor = .systemBackground
+        } else {
+            searchController.view.backgroundColor = .white
+        }
         self.present(searchController, animated: true, completion: nil)
     }
 
